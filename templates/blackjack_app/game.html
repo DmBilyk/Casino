@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #2c3e50; color: white; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2 { text-align: center; }
+        .hand { display: flex; justify-content: center; margin-bottom: 20px; }
+        .card { width: 80px; height: 120px; background-color: white; color: black; margin: 0 5px; border-radius: 5px; display: flex; flex-direction: column; justify-content: space-between; padding: 5px; }
+        .card.hidden { background-color: #34495e; color: #34495e; }
+        .red { color: red; }
+        .buttons { text-align: center; margin-top: 20px; }
+        button { font-size: 16px; padding: 10px 20px; margin: 0 10px; cursor: pointer; }
+        #balance-bet { text-align: center; margin-bottom: 20px; }
+        #bet-buttons { margin-top: 10px; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blackjack</h1>
+        <div id="balance-bet">
+            <h2>Balance: $<span id="balance">{{ balance }}</span></h2>
+            <h2>Current Bet: $<span id="current-bet">{{ bet }}</span></h2>
+            <div id="bet-buttons">
+                <button class="bet-btn" data-amount="5">+$5</button>
+                <button class="bet-btn" data-amount="10">+$10</button>
+                <button class="bet-btn" data-amount="100">+$100</button>
+                <button class="bet-btn" data-amount="1000">+$1000</button>
+                <button id="cancel-bet">Cancel Bet</button>
+            </div>
+        </div>
+        <div id="dealer">
+            <h2>Dealer: <span id="dealer-score">{{ game_state.dealer_score }}</span></h2>
+            <div class="hand" id="dealer-hand">
+                {% for card in game_state.dealer_hand %}
+                    <div class="card {% if forloop.counter0 == 1 and not game_state.game_over %}hidden{% endif %} {% if card.suit == '♥' or card.suit == '♦' %}red{% endif %}">
+                        <span>{{ card.rank }}</span>
+                        <span>{{ card.suit }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="player">
+            <h2>Player: <span id="player-score">{{ game_state.player_score }}</span></h2>
+            <div class="hand" id="player-hand">
+                {% for card in game_state.player_hand %}
+                    <div class="card {% if card.suit == '♥' or card.suit == '♦' %}red{% endif %}">
+                        <span>{{ card.rank }}</span>
+                        <span>{{ card.suit }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="hit" {% if game_state.game_over or bet == 0 %}disabled{% endif %}>Hit</button>
+            <button id="stay" {% if game_state.game_over or bet == 0 %}disabled{% endif %}>Stay</button>
+            <button id="new-game">New Game</button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            function updateGameState(data) {
+                $('#balance').text(data.balance);
+                $('#current-bet').text(data.bet);
+                $('#player-score').text(data.game_state.player_score);
+                $('#dealer-score').text(data.game_state.dealer_score);
+                updatePlayerHand(data.game_state.player_hand);
+                updateDealerHand(data.game_state.dealer_hand, data.game_state.game_over);
+
+                if (data.game_state.game_over || data.bet == 0) {
+                    $('#hit, #stay').prop('disabled', true);
+                } else {
+                    $('#hit, #stay').prop('disabled', false);
+                }
+            }
+
+            function updatePlayerHand(hand) {
+                $('#player-hand').empty();
+                hand.forEach(function(card) {
+                    $('#player-hand').append(
+                        `<div class="card ${(card.suit === '♥' || card.suit === '♦') ? 'red' : ''}">
+                            <span>${card.rank}</span>
+                            <span>${card.suit}</span>
+                        </div>`
+                    );
+                });
+            }
+
+            function updateDealerHand(hand, gameOver) {
+                $('#dealer-hand').empty();
+                hand.forEach(function(card, index) {
+                    $('#dealer-hand').append(
+                        `<div class="card ${index === 1 && !gameOver ? 'hidden' : ''} ${(card.suit === '♥' || card.suit === '♦') ? 'red' : ''}">
+                            <span>${card.rank}</span>
+                            <span>${card.suit}</span>
+                        </div>`
+                    );
+                });
+            }
+
+            function endGame(message) {
+                Swal.fire({
+                    title: 'Game Over',
+                    text: message,
+                    icon: getIcon(message),
+                    confirmButtonText: 'Play Again',
+                    background: '#2c3e50',
+                    color: '#ffffff',
+                    confirmButtonColor: '#3498db'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '?new_game=1';
+                    }
+                });
+            }
+
+            function getIcon(message) {
+                if (message.includes('You win')) {
+                    return 'success';
+                } else if (message.includes('Dealer wins')) {
+                    return 'warning';
+                } else if (message.includes('lose') || message.includes('Bust')) {
+                    return 'error';
+                } else {
+                    return 'info';
+                }
+            }
+
+            $('#hit').click(function() {
+                $.get('hit/', function(data) {
+                    updateGameState(data);
+                    if (data.message) {
+                        endGame(data.message);
+                    }
+                });
+            });
+
+            $('#stay').click(function() {
+                $.get('stay/', function(data) {
+                    updateGameState(data);
+                    endGame(data.message);
+                });
+            });
+
+            $('#new-game').click(function() {
+                window.location.href = '?new_game=1';
+            });
+
+            $('.bet-btn').click(function() {
+                var amount = $(this).data('amount');
+                var balance = parseInt($('#balance').text());
+                if (amount > balance) {
+                    amount = balance;
+                }
+                $.get('place_bet/', { amount: amount }, function(data) {
+                    $('#balance').text(data.balance);
+                    $('#current-bet').text(data.bet);
+                    if (data.bet > 0) {
+                        $('#hit, #stay').prop('disabled', false);
+                    }
+                });
+            });
+
+            $('#cancel-bet').click(function() {
+                $.get('place_bet/', { amount: 0 }, function(data) {
+                    $('#balance').text(data.balance);
+                    $('#current-bet').text(data.bet);
+                    $('#hit, #stay').prop('disabled', true);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
