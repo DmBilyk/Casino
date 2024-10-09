@@ -945,3 +945,127 @@ Watching for file changes with StatReloader
 Not Found: /blackjack/blackjack/place_bet/
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+                    ^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/cookie.py", line 92, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/signing.py", line 112, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+                           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/conf/__init__.py", line 90, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+                    ^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/cookie.py", line 92, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/signing.py", line 112, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+                           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/conf/__init__.py", line 90, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+                    ^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/cookie.py", line 92, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/signing.py", line 112, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+                           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/conf/__init__.py", line 90, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+                    ^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/messages/storage/cookie.py", line 92, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/signing.py", line 112, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+                           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/conf/__init__.py", line 90, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+/Users/macbook/Documents/BlackJack/BlackJack/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
