@@ -24,7 +24,7 @@ def spin(request):
 
     request.session['balance'] -= 10
 
-    symbols = ['🍋', '🍒', '7️⃣', '💎', '🍀']
+    symbols = ['🍋', '🍒', '7️⃣', '💎', '🍀','🍒','🍀']
     result = [random.choice(symbols) for _ in range(3)]
 
     win_amount = calculate_win(result)
@@ -38,7 +38,7 @@ def spin(request):
 
 
 def calculate_win(result):
-    if len(set(result)) == 1:  # All symbols are the same
+    if len(set(result)) == 1:
         if result[0] == '🍋':
             return 1000
         elif result[0] == '🍒':
@@ -50,9 +50,9 @@ def calculate_win(result):
         elif result[0] == '🍀':
             return 250
     elif len(set(result)) == 2:
-        if result[0] == '💎' and result[1] == '💎' or result[0] == '💎' and result[2] == '💎' or result[1] == '💎' and result[2] == '💎':
+        if result[0] == '💎' and result[2] == '💎':
             return 100
-        elif result[0] == '7️⃣' and result[1] == '7️⃣' or result[0] == '7️⃣' and result[2] == '7️⃣' or result[1] == '7️⃣' and result[2] == '7️⃣':
+        elif result[0] == '7️⃣' and result[1] == '7️⃣':
             return 50
     elif len(set(result)) == 3:
         if result[0] == '🍋' or result[1] == '🍋' or result[2] == '🍋':
