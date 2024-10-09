@@ -19,10 +19,10 @@ def slot_machine(request):
 def spin(request):
     initialize_session(request)
 
-    if request.session['balance'] < 10:
+    if request.session['balance'] < 25:
         return JsonResponse({'error': 'Insufficient balance'}, status=400)
 
-    request.session['balance'] -= 10
+    request.session['balance'] -= 25
 
     symbols = ['🍋', '🍒', '7️⃣', '💎', '🍀','🍒','🍀']
     result = [random.choice(symbols) for _ in range(3)]
