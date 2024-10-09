@@ -60,11 +60,15 @@
         <div class="buttons">
             <button id="hit" {% if game_state.game_over or bet == 0 %}disabled{% endif %}>Hit</button>
             <button id="stay" {% if game_state.game_over or bet == 0 %}disabled{% endif %}>Stay</button>
-            <button id="new-game">New Game</button>
         </div>
     </div>
     <script>
+
+
         $(document).ready(function() {
+
+            const MAX_BET = 10000;
+
             function updateGameState(data) {
                 $('#balance').text(data.balance);
                 $('#current-bet').text(data.bet);
@@ -78,6 +82,13 @@
                 } else {
                     $('#hit, #stay').prop('disabled', false);
                 }
+
+                    if (data.bet > 0) {
+                    $('.bet-btn, #cancel-bet').prop('disabled', true);  // Disable bet buttons
+                } else {
+                    $('.bet-btn, #cancel-bet').prop('disabled', false); // Enable bet buttons if no bet
+                }
+
             }
 
             function updatePlayerHand(hand) {
@@ -158,6 +169,10 @@
                 if (amount > balance) {
                     amount = balance;
                 }
+                        if (amount > MAX_BET) {
+                        amount = MAX_BET;
+                }
+
                 $.get('place_bet/', { amount: amount }, function(data) {
                     $('#balance').text(data.balance);
                     $('#current-bet').text(data.bet);
@@ -175,6 +190,8 @@
                 });
             });
         });
+
+
     </script>
 </body>
 </html>

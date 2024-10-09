@@ -1069,3 +1069,89 @@ django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be 
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Internal Server Error: /blackjack/
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/BlackJack/blackjack_app/views.py", line 30, in game
+    game.game_started = game_state['game_started']
+                        ~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'game_started'
+/Users/macbook/Documents/BlackJack/blackjack_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/macbook/Documents/BlackJack/blackjack_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+/Users/macbook/Documents/BlackJack/blackjack_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Watching for file changes with StatReloader
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Watching for file changes with StatReloader
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Not Found: /place_bet/
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /admin/edit_balance
+Not Found: /admin/edit_session_balance
+Not Found: /admin/edit_session_balance
+Watching for file changes with StatReloader
+Bad Request: /slot_machine/spin/
+Watching for file changes with StatReloader
+Not Found: /admin/edit_session_balance/
+/Users/macbook/Documents/BlackJack/BlackJack/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /blackjack//admin/edit_session_balance/
+/Users/macbook/Documents/BlackJack/BlackJack/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /admin/edit_session_balance
+Not Found: /admin/edit_session_balance/
+Watching for file changes with StatReloader
+Not Found: /admin/edit_session_balance/
+Not Found: /admin/edit_session_balance/
+Watching for file changes with StatReloader

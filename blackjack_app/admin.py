@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .admin_views import edit_session_balance
+from blackjack_app.admin_views import edit_session_balance
 
 class BlackjackAdminSite(admin.AdminSite):
     def get_urls(self):

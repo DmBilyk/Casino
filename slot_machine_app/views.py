@@ -56,6 +56,6 @@ def calculate_win(result):
             return 50
     elif len(set(result)) == 3:
         if result[0] == '🍋' or result[1] == '🍋' or result[2] == '🍋':
-            return 10
+            return 25
 
     return 0
