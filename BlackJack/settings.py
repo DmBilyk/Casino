@@ -24,13 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'magnificent-youthfulness.up.railway.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'casino-production-b3c9.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost',
     'http://127.0.0.1',
-    'https://magnificent-youthfulness.up.railway.app'
-]
+    'https://casino-production-b3c9.up.railway.app']
 
 
 # Application definition
