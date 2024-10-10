@@ -119,71 +119,73 @@
             <p>Each spin costs $25. Good luck!</p>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            const symbols = ['🍋', '🍒', '7️⃣', '💎', '🍀'];
-            const reels = $('#reel1, #reel2, #reel3');
-            let isSpinning = false;
+<script>
+    $(document).ready(function() {
+        const symbols = ['🍋', '🍒', '7️⃣', '💎', '🍀'];
+        const reels = $('#reel1, #reel2, #reel3');
+        let isSpinning = false;
 
-            function updateBalance(newBalance) {
-                $('#balance-amount').text(newBalance);
-                if (newBalance < 10) {
-                    $('#spin-button').prop('disabled', true);
-                } else {
-                    $('#spin-button').prop('disabled', false);
-                }
-            }
+        function updateBalance(newBalance) {
+            $('#balance-amount').text(newBalance);
+            $('#spin-button').prop('disabled', newBalance < 25); // Adjust based on spin cost
+        }
 
-            function spinReels() {
-                if (isSpinning) return;
-                isSpinning = true;
-                $('#spin-button').prop('disabled', true);
+        function spinReels() {
+            if (isSpinning) return;
+            isSpinning = true;
+            $('#spin-button').prop('disabled', true);
 
-                $.get('/slot_machine/spin/', function(data) {
-                    updateBalance(data.balance);
-                    const result = data.result;
+            $.get('/slot_machine/spin/', function(data) {
+                const result = data.result;
+                const winAmount = data.win_amount;
 
-                    reels.each(function(index) {
-                        const reel = $(this);
-                        let count = 0;
-                        const interval = setInterval(function() {
-                            reel.text(symbols[Math.floor(Math.random() * symbols.length)]);
-                            count++;
-                            if (count > 20 + index * 5) {
-                                clearInterval(interval);
-                                reel.text(result[index]);
-                                if (index === 2) {
+                reels.each(function(index) {
+                    const reel = $(this);
+                    let count = 0;
+                    const interval = setInterval(function() {
+                        reel.text(symbols[Math.floor(Math.random() * symbols.length)]);
+                        count++;
+                        if (count > 20 + index * 5) {
+                            clearInterval(interval);
+                            reel.text(result[index]);
+                            if (index === 2) {
+                                setTimeout(() => { // Delay before updating the balance
                                     isSpinning = false;
+                                    updateBalance(data.balance);
+                                    if (winAmount > 0) {
+                                        checkWin(result, winAmount);
+                                    }
                                     $('#spin-button').prop('disabled', false);
-                                    checkWin(result, data.win_amount);
-                                }
+                                }, 1500); // 2 seconds delay
                             }
-                        }, 50);
-                    });
+                        }
+                    }, 50);
+                });
+            });
+        }
+
+        function checkWin(result, winAmount) {
+            if (winAmount > 0) {
+                reels.addClass('win-animation');
+                setTimeout(function() {
+                    reels.removeClass('win-animation');
+                }, 1500);
+
+                Swal.fire({
+                    title: 'You Win!',
+                    text: `Congratulations! You won $${winAmount}`,
+                    icon: 'success',
+                    confirmButtonText: 'Awesome!',
+                    background: '#2c3e50',
+                    color: '#ffffff',
+                    confirmButtonColor: '#e74c3c'
                 });
             }
+        }
 
-            function checkWin(result, winAmount) {
-                if (winAmount > 0) {
-                    reels.addClass('win-animation');
-                    setTimeout(function() {
-                        reels.removeClass('win-animation');
-                    }, 1500);
+        $('#spin-button').click(spinReels);
+    });
+</script>
 
-                    Swal.fire({
-                        title: 'You Win!',
-                        text: `Congratulations! You won $${winAmount}`,
-                        icon: 'success',
-                        confirmButtonText: 'Awesome!',
-                        background: '#2c3e50',
-                        color: '#ffffff',
-                        confirmButtonColor: '#e74c3c'
-                    });
-                }
-            }
-
-            $('#spin-button').click(spinReels);
-        });
-    </script>
 </body>
 </html>

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'blackjack_app',
     'slot_machine_app',
     'casino_main',
+    'roulette',
 ]
 
 MIDDLEWARE = [

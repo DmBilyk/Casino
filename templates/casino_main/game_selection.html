@@ -71,16 +71,22 @@
     <div class="container">
         <h1>Welcome to Our Casino</h1>
         <div class="game-selection">
-            <div class="game-card" onclick="location.href='/blackjack/'">
-                <div class="game-icon">♠️</div>
-                <div class="game-title">Blackjack</div>
-                <div class="game-description">Test your luck and skill in this classic card game!</div>
-            </div>
-            <div class="game-card" onclick="location.href='/slot_machine/'">
-                <div class="game-icon">🎰</div>
-                <div class="game-title">Slot Machine</div>
-                <div class="game-description">Spin the reels and win big with our exciting slot machine!</div>
-            </div>
+        <div class="game-card" onclick="location.href='/blackjack/'">
+            <div class="game-icon">♠️</div>
+            <div class="game-title">Blackjack</div>
+            <div class="game-description">Test your luck and skill in this classic card game!</div>
+        </div>
+        <div class="game-card" onclick="location.href='/slot_machine/'">
+            <div class="game-icon">🎰</div>
+            <div class="game-title">Slot Machine</div>
+            <div class="game-description">Spin the reels and win big with our exciting slot machine!</div>
+        </div>
+        <div class="game-card" onclick="location.href='/roulette/'">
+            <div class="game-icon">🎲</div>
+            <div class="game-title">Roulette</div>
+            <div class="game-description">Place your bets and watch the wheel spin in this classic casino game!</div>
+        </div>
+
         </div>
         <div id="balance">Balance: $<span id="balance-amount">{{ balance }}</span></div>
     </div>
