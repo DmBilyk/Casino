@@ -75,3 +75,14 @@ class BlackjackGame(models.Model):
             return "You win!"
         else:
             return "It's a tie!"
+
+
+from django.db import models
+from django.contrib.auth.models import User
+
+class UserBalance(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    balance = models.IntegerField(default=1000)
+
+    def __str__(self):
+        return f"{self.user.username}: {self.balance}"
