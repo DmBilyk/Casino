@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.admin.views.decorators import staff_member_required
 
 
+
+@staff_member_required
 def edit_session_balance(request):
     if request.method == 'POST':
 

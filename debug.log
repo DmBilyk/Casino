@@ -1930,3 +1930,4 @@ django.urls.exceptions.NoReverseMatch: Reverse for 'edit_session_balance' not fo
 Watching for file changes with StatReloader
 Not Found: /blackjack/admin/edit_all_balances/
 Not Found: /blackjack/admin/edit_all_balances/
+Watching for file changes with StatReloader
