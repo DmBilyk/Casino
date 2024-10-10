@@ -91,11 +91,32 @@
         .rules li {
             margin-bottom: 10px;
         }
+                        #back-to-home {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: 18px;
+          background-color: #e74c3c;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+
+        #back-to-home:hover {
+          background-color: #c0392b;
+        }
+
+        #back-to-home:focus {
+          outline: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Slot Machine</h1>
+        <button id="back-to-home" title="Back to Home">❮</button>
         <div id="balance">Balance: $<span id="balance-amount">{{ balance }}</span></div>
         <div class="slot-machine">
             <div class="reel" id="reel1">?</div>
@@ -185,6 +206,11 @@
 
         $('#spin-button').click(spinReels);
     });
+
+
+        $('#back-to-home').click(function() {
+  window.location.href = '/';
+});
 </script>
 
 </body>

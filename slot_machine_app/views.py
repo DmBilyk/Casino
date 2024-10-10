@@ -6,10 +6,16 @@ import random
 def initialize_session(request):
     if 'balance' not in request.session:
         request.session['balance'] = 1000
+    if 'first_visit' not in request.session:
+        request.session['first_visit'] = True
+
 
 
 def slot_machine(request):
     initialize_session(request)
+
+
+
     context = {
         'balance': request.session['balance'],
     }
@@ -19,13 +25,21 @@ def slot_machine(request):
 def spin(request):
     initialize_session(request)
 
+
     if request.session['balance'] < 25:
         return JsonResponse({'error': 'Insufficient balance'}, status=400)
 
     request.session['balance'] -= 25
 
     symbols = ['🍋', '🍒', '7️⃣', '💎', '🍀','🍒','🍀']
-    result = [random.choice(symbols) for _ in range(3)]
+
+    is_first_visit = request.session.get('first_visit', True)
+    if is_first_visit:
+        result = ['💎', '💎', '💎']
+        request.session['first_visit'] = False
+        request.session.modified = True
+    else:
+        result = [random.choice(symbols) for _ in range(3)]
 
     win_amount = calculate_win(result)
     request.session['balance'] += win_amount
