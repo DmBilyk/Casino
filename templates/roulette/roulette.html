@@ -37,20 +37,19 @@
         margin-bottom: 20px;
     }
     #roulette-wheel {
-        width: calc(70vw); /* Scales with viewport width */
-        max-width: 300px;
-        height: calc(70vw);
-        max-height: 300px;
+        width: 300px;
+        height: 300px;
         border-radius: 50%;
-        border: 8px solid #f1c40f;
+        border: 10px solid #f1c40f;
         margin: 0 auto 20px;
         position: relative;
         overflow: hidden;
         background-color: #27ae60;
     }
+
     #ball {
-        width: 10%;
-        height: 10%;
+        width: 30px;
+        height: 30px;
         background-color: white;
         border-radius: 50%;
         position: absolute;
@@ -59,14 +58,16 @@
         transform: translate(-50%, -50%);
         transition: all 0.05s linear;
     }
+
     #number-display {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: calc(1rem + 1vw); /* Responsive font size */
+        font-size: 36px;
         font-weight: bold;
         color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     #bet-amounts {
         margin: 20px 0; /* Add some margin to the top and bottom */
@@ -172,40 +173,44 @@
         width: 60px;
     }
 
-        .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.7);
-    }
-    .modal-content {
-        background-color: #2c3e50;
-        color: white;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 500px;
-        border-radius: 10px;
-        text-align: center;
-    }
-    #acknowledge-warning {
-        background-color: #e74c3c;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        margin-top: 20px;
-        cursor: pointer;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-    #acknowledge-warning:hover {
-        background-color: #c0392b;
-    }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #2c3e50;
+    color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#acknowledge-warning {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#acknowledge-warning:hover {
+    background-color: #c0392b;
+}
 
     /* Mobile-specific adjustments */
     @media (max-width: 600px) {
@@ -306,12 +311,26 @@
         let isSpinning = false;
 
         $('#warning-modal').show();
+        disableGameFunctionality();
 
 
-        $('#acknowledge-warning').click(function() {
-            $('#warning-modal').hide();
-        });
+    $('#acknowledge-warning').click(function() {
+        $('#warning-modal').hide();
 
+        enableGameFunctionality();
+    });
+
+    function enableGameFunctionality() {
+
+        $('.bet-options button').prop('disabled', false);
+        $('#spin-roulette').prop('disabled', false);
+    }
+
+        function disableGameFunctionality() {
+
+        $('.bet-options button').prop('disabled', true);
+        $('#spin-roulette').prop('disabled', true);
+    }
 
         function updateBalance(newBalance) {
             $('#balance-amount').text(newBalance);
@@ -478,44 +497,44 @@
                 let maxSpinTime = 10000;
                 let startTime = Date.now();
 
-                function spin() {
-                    if ((spins < totalSpins || currentIndex !== targetIndex) && (Date.now() - startTime < maxSpinTime)) {
-                        let nextIndex = (currentIndex + 1) % totalNumbers;
-                        currentIndex = nextIndex;
+        function spin() {
+            if ((spins < totalSpins || currentIndex !== targetIndex) && (Date.now() - startTime < maxSpinTime)) {
+                let nextIndex = (currentIndex + 1) % totalNumbers;
+                currentIndex = nextIndex;
 
-                        const angle = (currentIndex / totalNumbers) * 360;
-                        const radians = angle * (Math.PI / 180);
-                        const radius = 120;
-                        const x = Math.cos(radians) * radius;
-                        const y = Math.sin(radians) * radius;
+                const angle = (currentIndex / totalNumbers) * 360;
+                const radians = angle * (Math.PI / 180);
+                const radius = 120;
+                const x = Math.cos(radians) * radius;
+                const y = Math.sin(radians) * radius;
 
-                        $('#ball').css({
-                            transform: `translate(${x}px, ${y}px)`
-                        });
+                $('#ball').css({
+                    transform: `translate(${x}px, ${y}px)`
+                });
 
-                        const currentNumber = numbers[currentIndex];
-                        const currentColor = colors[currentNumber];
-                        $('#number-display').text(currentNumber).css('color', currentColor);
-                        $('#roulette-wheel').css('background-color', currentColor === 'red' ? '#e74c3c' : (currentColor === 'black' ? '#34495e' : '#27ae60'));
+                const currentNumber = numbers[currentIndex];
+                const currentColor = colors[currentNumber];
+                $('#number-display').text(currentNumber).css('color', currentColor);
+                $('#roulette-wheel').css('background-color', currentColor === 'red' ? '#e74c3c' : (currentColor === 'black' ? '#34495e' : '#27ae60'));
 
-                        if (spins >= totalSpins) {
-                            currentSpeed += 20;
+                if (spins >= totalSpins) {
+                    currentSpeed += 20;
 
-                            if (currentIndex === targetIndex && currentSpeed >= minSpeed) {
-                                finishSpin();
-                                return;
-                            }
-                        }
-
-                        if (currentIndex === totalNumbers - 1) {
-                            spins++;
-                        }
-
-                        setTimeout(spin, currentSpeed);
-                    } else {
+                    if (currentIndex === targetIndex && currentSpeed >= minSpeed) {
                         finishSpin();
+                        return;
                     }
                 }
+
+                if (currentIndex === totalNumbers - 1) {
+                    spins++;
+                }
+
+                setTimeout(spin, currentSpeed);
+            } else {
+                finishSpin();
+            }
+        }
 
                 function finishSpin() {
                     $('#ball').css({
@@ -530,53 +549,58 @@
             });
         }
 
-    $('#spin-roulette').click(function() {
-            if (isSpinning) return;
-            isSpinning = true;
-            $(this).prop('disabled', true);
-            disableBettingOptions();
+$('#spin-roulette').click(function() {
+    if (isSpinning) return;
+    isSpinning = true;
+    $(this).prop('disabled', true);
+    disableBettingOptions();
 
-        $.post('/roulette/spin/', { bets: JSON.stringify(bets), csrfmiddlewaretoken: csrfToken }, function(data) {
-            const result = data.result.split(' ')[0];
-            const winAmount = data.win_amount;
+    $.post('/roulette/spin/', { bets: JSON.stringify(bets), csrfmiddlewaretoken: csrfToken }, function(data) {
+        const result = data.result.split(' ')[0];
+        const winAmount = data.win_amount;
 
-            spinRouletteWheel(result).then(() => {
-                let message = `The ball landed on ${data.result}. `;
-                if (winAmount > 0) {
-                    message += `You won $${winAmount}!`;
-                } else {
-                    message += 'You lost.';
-                }
+        spinRouletteWheel(result).then(() => {
+            let message = `The ball landed on ${data.result}. `;
+            if (winAmount > 0) {
+                message += `You won $${winAmount}!`;
+            } else {
+                message += 'You lost.';
+            }
 
-                history.unshift(`Spin result: ${data.result}. Outcome: ${winAmount > 0 ? 'Win' : 'Loss'}`);
-                updateHistory();
+            history.unshift(`Spin result: ${data.result}. Outcome: ${winAmount > 0 ? 'Win' : 'Loss'}`);
+            updateHistory();
 
-                Swal.fire({
-                    title: 'Roulette Result',
-                    text: message,
-                    icon: winAmount > 0 ? 'success' : 'error',
-                    confirmButtonText: 'Awesome!',
-                    background: '#2c3e50',
-                    color: '#ffffff',
-                    confirmButtonColor: '#e74c3c'
-                }).then(() => {
-                    updateBalance(data.balance);
-                    bets = [];
-                    updateCurrentBets();
-                    isSpinning = false;
-                    updateSpinButtonState();
-                    resetGame();
-                });
+            Swal.fire({
+                title: 'Roulette Result',
+                text: message,
+                icon: winAmount > 0 ? 'success' : 'error',
+                confirmButtonText: 'Awesome!',
+                background: '#2c3e50',
+                color: '#ffffff',
+                confirmButtonColor: '#e74c3c'
+            }).then(() => {
+                updateBalance(data.balance);
+                bets = [];
+                updateCurrentBets();
+                isSpinning = false;
+                updateSpinButtonState();
+                resetGame();
             });
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.error('AJAX error:', textStatus, errorThrown);
-            alert('Error processing the spin. Please try again.');
+        }).catch(error => {
+            console.error('Error during wheel spin:', error);
+            alert('An error occurred during the spin. Please try again.');
             isSpinning = false;
             updateSpinButtonState();
             resetGame();
         });
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('AJAX error:', textStatus, errorThrown);
+        alert('Error processing the spin. Please try again.');
+        isSpinning = false;
+        updateSpinButtonState();
+        resetGame();
     });
-
+});
 
 
                 });
