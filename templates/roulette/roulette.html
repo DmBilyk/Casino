@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,132 +7,254 @@
     <title>Roulette Game</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
+    <link rel="icon" href="https://cdn.icon-icons.com/icons2/389/PNG/96/Diamond_96x96-32_37897.png" type="image/x-icon">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #2c3e50;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+    }
+    .container {
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+        padding: 0 10px;
+    }
+    h1, h2 {
+        color: #f1c40f;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-size: calc(1.8rem + 1vw); /* Responsive font size */
+    }
+    #balance {
+        font-size: calc(1.2rem + 0.5vw); /* Responsive font size */
+        margin-bottom: 20px;
+    }
+    #roulette-wheel {
+        width: calc(70vw); /* Scales with viewport width */
+        max-width: 300px;
+        height: calc(70vw);
+        max-height: 300px;
+        border-radius: 50%;
+        border: 8px solid #f1c40f;
+        margin: 0 auto 20px;
+        position: relative;
+        overflow: hidden;
+        background-color: #27ae60;
+    }
+    #ball {
+        width: 10%;
+        height: 10%;
+        background-color: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.05s linear;
+    }
+    #number-display {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: calc(1rem + 1vw); /* Responsive font size */
+        font-weight: bold;
+        color: white;
+    }
+    #bet-amounts {
+        margin: 20px 0; /* Add some margin to the top and bottom */
+    }
+    .bet-options {
+        display: flex;
+        justify-content: center;
+        gap: 10px; /* Space between buttons */
+        flex-wrap: wrap; /* Allow buttons to wrap */
+        margin-bottom: 10px; /* Space below the bet options */
+    }
+    .bet-controls {
+        display: flex;
+        justify-content: center;
+        gap: 10px; /* Space between Cancel and Confirm buttons */
+    }
+    .bet-amount, #cancel-bet, #confirm-bet {
+        flex: 1; /* Allow buttons to grow equally */
+        min-width: 80px; /* Minimum width for buttons */
+        max-width: 120px; /* Prevent buttons from being too wide */
+        padding: 10px; /* Add padding for better touch targets */
+        font-size: calc(1rem + 0.3vw); /* Responsive font size */
+        background-color: #e74c3c; /* Button color */
+        color: white; /* Text color */
+        border: none; /* Remove border */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor */
+        transition: background-color 0.3s; /* Smooth transition */
+    }
+    .bet-amount:hover, #cancel-bet:hover, #confirm-bet:hover {
+        background-color: #c0392b; /* Darker color on hover */
+    }
+    .bet-amount:disabled, #cancel-bet:disabled, #confirm-bet:disabled {
+        background-color: #95a5a6; /* Disabled button color */
+        cursor: not-allowed; /* Not allowed cursor */
+    }
+    button {
+        font-size: calc(1rem + 0.3vw); /* Responsive button size */
+        padding: 10px 15px;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        flex: 1; /* Makes buttons take up equal space */
+        min-width: 100px; /* Ensures buttons don't get too small */
+        max-width: 150px; /* Prevents buttons from being too wide */
+        box-sizing: border-box; /* Ensures padding is included in width */
+    }
+    button:hover {
+        background-color: #c0392b;
+    }
+    button:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+    }
+    #current-bets {
+        margin-bottom: 20px;
+    }
+    #history {
+        background-color: rgba(52, 73, 94, 0.8);
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 30px;
+        text-align: left;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    #show-full-history {
+        margin-top: 10px;
+        background-color: #3498db;
+        font-size: calc(0.9rem + 0.5vw); /* Responsive font size */
+    }
+    #show-full-history:hover {
+        background-color: #2980b9;
+    }
+    #back-to-home {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 18px;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        padding: 10px;
+    }
+    #back-to-home:hover {
+        background-color: #c0392b;
+    }
+    #back-to-home:focus {
+        outline: none;
+    }
+    #number-selection {
+        margin-top: 10px;
+    }
+    #bet-number-input {
+        font-size: 18px;
+        padding: 5px;
+        width: 60px;
+    }
+
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .modal-content {
+        background-color: #2c3e50;
+        color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    #acknowledge-warning {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    #acknowledge-warning:hover {
+        background-color: #c0392b;
+    }
+
+    /* Mobile-specific adjustments */
+    @media (max-width: 600px) {
         body {
-            font-family: Arial, sans-serif;
-            background-color: #2c3e50;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            text-align: center;
-            max-width: 800px;
-            width: 100%;
-        }
-        h1, h2 {
-            color: #f1c40f;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        #balance {
-            font-size: 24px;
-            margin-bottom: 20px;
+            padding: 10px;
         }
         #roulette-wheel {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            border: 10px solid #f1c40f;
-            margin: 0 auto 20px;
-            position: relative;
-            overflow: hidden;
-            background-color: #27ae60;
-        }
-        #ball {
-            width: 30px;
-            height: 30px;
-            background-color: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.05s linear;
-        }
-        #number-display {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
-        .bet-options, .bet-amounts {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            width: 80vw;
+            height: 80vw;
+            max-width: 250px;
+            max-height: 250px;
         }
         button {
-            font-size: 18px;
-            padding: 10px 20px;
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            font-size: 14px;
+            min-width: 80px; /* Adjust minimum width for smaller screens */
+            flex: 1 1 auto; /* Allow buttons to take full width */
+            max-width: 100%; /* Allow buttons to stretch full width */
         }
-        button:hover {
-            background-color: #c0392b;
+        h1, h2 {
+            font-size: calc(1.6rem + 1vw);
         }
-        button:disabled {
-            background-color: #95a5a6;
-            cursor: not-allowed;
+                .bet-options {
+            flex-direction: column; /* Stack buttons vertically on mobile */
+            align-items: center; /* Center buttons horizontally */
         }
-        #current-bets {
-            margin-bottom: 20px;
+        .bet-controls {
+            flex-direction: column; /* Stack control buttons vertically */
+            align-items: center; /* Center control buttons */
         }
-        #history {
-            background-color: rgba(52, 73, 94, 0.8);
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 30px;
-            text-align: left;
-            max-height: 200px;
-            overflow-y: auto;
+        .bet-amount, #cancel-bet, #confirm-bet {
+            width: 100%; /* Full width for buttons on small screens */
+            min-width: unset; /* Remove minimum width to allow full width */
         }
-        #show-full-history {
-            margin-top: 10px;
-            background-color: #3498db;
-        }
-        #show-full-history:hover {
-            background-color: #2980b9;
-        }
-        #back-to-home {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 18px;
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        #back-to-home:hover {
-            background-color: #c0392b;
-        }
-        #back-to-home:focus {
-            outline: none;
-        }
-        #number-selection {
-            margin-top: 10px;
-        }
-        #bet-number-input {
-            font-size: 18px;
-            padding: 5px;
-            width: 60px;
-        }
-    </style>
+
+    }
+</style>
+
+
+
 </head>
 <body>
+<div id="warning-modal" class="modal">
+    <div class="modal-content">
+        <h2>Health and Safety Warning</h2>
+        <p>This game contains a spinning wheel that may potentially trigger seizures for people with photosensitive epilepsy. Viewer discretion is advised.</p>
+        <button id="acknowledge-warning">I Understand</button>
+    </div>
+</div>
+
     <div class="container">
         <h1>Roulette</h1>
         <button id="back-to-home" title="Back to Home">❮</button>
@@ -181,6 +304,13 @@
         let history = [];
         let showingFullHistory = false;
         let isSpinning = false;
+
+        $('#warning-modal').show();
+
+
+        $('#acknowledge-warning').click(function() {
+            $('#warning-modal').hide();
+        });
 
 
         function updateBalance(newBalance) {

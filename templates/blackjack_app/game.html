@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,40 +7,138 @@
     <title>Blackjack</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #2c3e50; color: white; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1, h2 { text-align: center; }
-        .hand { display: flex; justify-content: center; margin-bottom: 20px; }
-        .card { width: 80px; height: 120px; background-color: white; color: black; margin: 0 5px; border-radius: 5px; display: flex; flex-direction: column; justify-content: space-between; padding: 5px; }
-        .card.hidden { background-color: #34495e; color: #34495e; }
-        .red { color: red; }
-        .buttons { text-align: center; margin-top: 20px; }
-        button { font-size: 16px; padding: 10px 20px; margin: 0 10px; cursor: pointer; }
-        #balance-bet { text-align: center; margin-bottom: 20px; }
-        #bet-buttons { margin-top: 10px; }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
-                        #back-to-home {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          font-size: 18px;
-          background-color: #e74c3c;
-          color: white;
-          border: none;
-          border-radius: 50%;
-          cursor: pointer;
-          transition: background-color 0.3s;
+    <link rel="icon" href="https://cdn.icon-icons.com/icons2/389/PNG/96/Diamond_96x96-32_37897.png" type="image/x-icon">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #2c3e50;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 100%;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    h1, h2 {
+        text-align: center;
+        font-size: calc(1.5rem + 1vw);
+    }
+    .hand {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    .card {
+        width: calc(60px + 2vw);
+        height: calc(90px + 2vw);
+        background-color: white;
+        color: black;
+        margin: 0 5px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 5px;
+    }
+    .card.hidden {
+        background-color: #34495e;
+        color: #34495e;
+    }
+    .red {
+        color: red;
+    }
+    .buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    button, .bet-btn {
+        font-size: calc(0.9rem + 0.5vw);
+        padding: 10px 15px;
+        cursor: pointer;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        min-width: 100px;
+        flex: 1 1 auto;
+        max-width: 150px;
+    }
+    button:hover, .bet-btn:hover {
+        background-color: #c0392b;
+    }
+    button:disabled, .bet-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    #balance-bet {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: calc(1rem + 0.5vw);
+    }
+    #bet-buttons {
+        margin-top: 10px;
+    }
+    #back-to-home {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 18px;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 10px;
+        transition: background-color 0.3s;
+    }
+    #back-to-home:hover {
+        background-color: #c0392b;
+    }
+    #back-to-home:focus {
+        outline: none;
+    }
+
+
+    @media (max-width: 600px) {
+        .card {
+            width: calc(50px + 2vw);
+            height: calc(75px + 2vw);
+        }
+        button, .bet-btn {
+            font-size: 14px;
+            min-width: 80px;
         }
 
-        #back-to-home:hover {
-          background-color: #c0392b;
+        #bet-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
         }
+        #bet-buttons button {
+            flex: 1 1 40px;
+            min-width: 80px;
+        }
+        h1, h2 {
+            font-size: calc(1.3rem + 1vw);
+        }
+    }
+</style>
 
-        #back-to-home:focus {
-          outline: none;
-        }
-    </style>
+
+
+
+
 </head>
 <body>
     <div class="container">

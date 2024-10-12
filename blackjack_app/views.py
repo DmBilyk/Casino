@@ -1,17 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from casino_main.models import Profile
 from .game_logic import BlackjackGame, Card
+import json
 
-def initialize_session(request):
-    if 'balance' not in request.session:
-        request.session['balance'] = 1000
-    if 'bet' not in request.session:
-        request.session['bet'] = 0
-    if 'game' not in request.session:
-        request.session['game'] = None
 
+@login_required
 def game(request):
-    initialize_session(request)
+    profile, created = Profile.objects.get_or_create(user=request.user)
 
     if request.GET.get('new_game'):
         request.session['game'] = None
@@ -31,13 +28,15 @@ def game(request):
 
     context = {
         'game_state': request.session['game'],
-        'balance': request.session['balance'],
-        'bet': request.session['bet'],
+        'balance': profile.balance,
+        'bet': request.session.get('bet', 0),
     }
     return render(request, 'blackjack_app/game.html', context)
 
+
+@login_required
 def start_game(request):
-    initialize_session(request)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     game = BlackjackGame()
     game_state = request.session['game']
     game.dealer_hand = [Card(**card) for card in game_state['dealer_hand']]
@@ -47,12 +46,14 @@ def start_game(request):
 
     return JsonResponse({
         'game_state': request.session['game'],
-        'balance': request.session['balance'],
-        'bet': request.session['bet'],
+        'balance': profile.balance,
+        'bet': request.session.get('bet', 0),
     })
 
+
+@login_required
 def hit(request):
-    initialize_session(request)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     game = BlackjackGame()
     game_state = request.session['game']
     game.player_hand = [Card(**card) for card in game_state['player_hand']]
@@ -63,17 +64,22 @@ def hit(request):
     request.session['game'] = game.get_game_state()
 
     if result == "Bust! You lose.":
+        bet = request.session.get('bet', 0)
+        profile.balance -= bet
+        profile.save()
         request.session['bet'] = 0
 
     return JsonResponse({
         'game_state': request.session['game'],
-        'balance': request.session['balance'],
-        'bet': request.session['bet'],
+        'balance': profile.balance,
+        'bet': request.session.get('bet', 0),
         'message': result,
     })
 
+
+@login_required
 def stay(request):
-    initialize_session(request)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     game = BlackjackGame()
     game_state = request.session['game']
     game.player_hand = [Card(**card) for card in game_state['player_hand']]
@@ -82,37 +88,42 @@ def stay(request):
     result = game.dealer_play()
     request.session['game'] = game.get_game_state()
 
+    bet = request.session.get('bet', 0)
     if "You win" in result:
-        request.session['balance'] += request.session['bet'] * 2
+        profile.balance += bet * 2
     elif "Dealer wins" in result:
-        pass
+        profile.balance -= bet
     else:  # It's a tie
-        request.session['balance'] += request.session['bet']
+        pass  # The bet is returned to the player
 
+    profile.save()
     request.session['bet'] = 0
 
     return JsonResponse({
         'game_state': request.session['game'],
-        'balance': request.session['balance'],
+        'balance': profile.balance,
         'bet': request.session['bet'],
         'message': result,
     })
 
+
+@login_required
 def place_bet(request):
-    initialize_session(request)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     amount = int(request.GET.get('amount', 0))
-    current_bet = request.session['bet']
-    balance = request.session['balance']
+    current_bet = request.session.get('bet', 0)
 
     if amount == 0:  # Cancel bet
-        request.session['balance'] += current_bet
+        profile.balance += current_bet
         request.session['bet'] = 0
-    elif balance >= amount:
-        request.session['balance'] -= amount
-        request.session['bet'] += amount
+    elif profile.balance >= amount:
+        profile.balance -= amount
+        request.session['bet'] = request.session.get('bet', 0) + amount
+
+    profile.save()
 
     return JsonResponse({
-        'balance': request.session['balance'],
+        'balance': profile.balance,
         'bet': request.session['bet'],
         'game_state': request.session['game'],
     })

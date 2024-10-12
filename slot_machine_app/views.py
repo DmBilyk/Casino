@@ -1,35 +1,35 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 import random
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from casino_main.models import Profile
 
 
 def initialize_session(request):
-    if 'balance' not in request.session:
-        request.session['balance'] = 1000
     if 'first_visit' not in request.session:
         request.session['first_visit'] = True
 
 
 
+@login_required
 def slot_machine(request):
-    initialize_session(request)
 
-
-
+    profile, created = Profile.objects.get_or_create(user=request.user)
     context = {
-        'balance': request.session['balance'],
+        'balance': profile.balance,
     }
     return render(request, 'slot_machine_app/slot_machine.html', context)
 
-
+@login_required
 def spin(request):
     initialize_session(request)
 
-
-    if request.session['balance'] < 25:
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    if profile.balance < 25:
         return JsonResponse({'error': 'Insufficient balance'}, status=400)
 
-    request.session['balance'] -= 25
+    profile.balance -= 25
 
     symbols = ['🍋', '🍒', '7️⃣', '💎', '🍀','🍒','🍀']
 
@@ -42,14 +42,14 @@ def spin(request):
         result = [random.choice(symbols) for _ in range(3)]
 
     win_amount = calculate_win(result)
-    request.session['balance'] += win_amount
+    profile.balance += win_amount
+    profile.save()
 
     return JsonResponse({
         'result': result,
-        'balance': request.session['balance'],
+        'balance': profile.balance,
         'win_amount': win_amount,
     })
-
 
 def calculate_win(result):
     if len(set(result)) == 1:

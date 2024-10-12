@@ -1,12 +1,17 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import Profile
 
-def initialize_session(request):
-    if 'balance' not in request.session:
-        request.session['balance'] = 1000
 
+@login_required
 def game_selection(request):
-    initialize_session(request)
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if created:
+        profile.balance = 1000
+        profile.save()
+
     context = {
-        'balance': request.session['balance'],
+        'balance': profile.balance,
     }
     return render(request, 'casino_main/game_selection.html', context)
