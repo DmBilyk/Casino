@@ -113,11 +113,10 @@ def place_bet(request):
     amount = int(request.GET.get('amount', 0))
     current_bet = request.session.get('bet', 0)
 
-    if amount == 0:  # Cancel bet
+    if amount == 0:
         profile.balance += current_bet
         request.session['bet'] = 0
     elif profile.balance >= amount:
-        profile.balance -= amount
         request.session['bet'] = request.session.get('bet', 0) + amount
 
     profile.save()
