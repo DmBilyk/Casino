@@ -179,8 +179,10 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 LOGIN_URL = '/auth/login/google-oauth2/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://casino-production-b3c9.up.railway.app/auth/complete/google-oauth2/'
 
 
+SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = ['casino-production-b3c9.up.railway.app']
 # Time zone and language settings
 TIME_ZONE = 'UTC'
 USE_TZ = True
