@@ -39,16 +39,27 @@
             margin: 0 auto 20px;
             position: relative;
             overflow: hidden;
+            background-color: #27ae60;
         }
         #ball {
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
             background-color: white;
             border-radius: 50%;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            transition: all 0.05s linear;
+        }
+        #number-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
         }
         .bet-options, .bet-amounts {
             display: flex;
@@ -82,29 +93,42 @@
             padding: 20px;
             margin-top: 30px;
             text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
         }
-
-                #back-to-home {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          font-size: 18px;
-          background-color: #e74c3c;
-          color: white;
-          border: none;
-          border-radius: 50%;
-          cursor: pointer;
-          transition: background-color 0.3s;
+        #show-full-history {
+            margin-top: 10px;
+            background-color: #3498db;
         }
-
+        #show-full-history:hover {
+            background-color: #2980b9;
+        }
+        #back-to-home {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
         #back-to-home:hover {
-          background-color: #c0392b;
+            background-color: #c0392b;
         }
-
         #back-to-home:focus {
-          outline: none;
+            outline: none;
         }
-
+        #number-selection {
+            margin-top: 10px;
+        }
+        #bet-number-input {
+            font-size: 18px;
+            padding: 5px;
+            width: 60px;
+        }
     </style>
 </head>
 <body>
@@ -114,6 +138,7 @@
         <div id="balance">Balance: $<span id="balance-amount">{{ balance }}</span></div>
         <div id="roulette-wheel">
             <div id="ball"></div>
+            <div id="number-display"></div>
         </div>
         <div id="bet-selection">
             <div class="bet-options">
@@ -143,22 +168,35 @@
             <h2>History</h2>
             <ul id="history-list"></ul>
         </div>
+        <button id="show-full-history">Show Full History</button>
     </div>
 <script>
     const csrfToken = '{{ csrf_token }}';
+
 
     $(document).ready(function() {
         let currentBetType = '';
         let currentBetAmount = 0;
         let bets = [];
         let history = [];
+        let showingFullHistory = false;
+        let isSpinning = false;
 
-        // Оновлення балансу
+
         function updateBalance(newBalance) {
             $('#balance-amount').text(newBalance);
         }
 
-        // Оновлення поточних ставок
+    function resetGame() {
+        currentBetType = '';
+        currentBetAmount = 0;
+        bets = [];
+        isSpinning = false;
+        updateCurrentBets();
+        enableBettingOptions();
+        $('#confirm-bet').text('Confirm');
+        $('#number-selection, #bet-amounts').hide();
+    }
         function updateCurrentBets() {
             let betsHtml = '<h3>Current Bets:</h3>';
             bets.forEach((bet, index) => {
@@ -166,7 +204,6 @@
             });
             $('#current-bets').html(betsHtml);
 
-            // Обробка скасування окремої ставки
             $('.cancel-single-bet').click(function() {
                 const index = $(this).data('index');
                 bets.splice(index, 1);
@@ -176,22 +213,20 @@
                 }
             });
 
-            // Показати кнопку "Spin" якщо є ставки
             if (bets.length > 0) {
                 $('#spin-roulette').show();
             }
         }
 
-        // Оновлення історії ставок
         function updateHistory() {
             let historyHtml = '';
-            history.slice(-5).forEach(item => {
+            let displayHistory = showingFullHistory ? history : history.slice(0, 5);
+            displayHistory.forEach(item => {
                 historyHtml += `<li>${item}</li>`;
             });
             $('#history-list').html(historyHtml);
         }
 
-        // Обробка вибору типу ставки
         $('.bet-options button').click(function() {
             currentBetType = $(this).text().toLowerCase();
             if (currentBetType === 'number') {
@@ -204,7 +239,6 @@
             $('#bet-selection').hide();
         });
 
-        // Підтвердження ставки на номер
         $('#confirm-number').click(function() {
             const number = $('#bet-number-input').val();
             if (number >= 0 && number <= 36) {
@@ -216,7 +250,6 @@
             }
         });
 
-        // Обробка вибору суми ставки
         $('.bet-amount').click(function() {
             const amount = parseInt($(this).data('amount'));
             const maxBet = currentBetType.includes('number') ? 1000 : 10000;
@@ -228,7 +261,6 @@
             }
         });
 
-        // Скасування ставки
         $('#cancel-bet').click(function() {
             currentBetAmount = 0;
             $('#bet-selection').show();
@@ -236,7 +268,29 @@
             $('#number-selection').hide();
         });
 
-        // Підтвердження ставки
+        function updateCurrentBets() {
+        let betsHtml = '<h3>Current Bets:</h3>';
+        bets.forEach((bet, index) => {
+            betsHtml += `<p>${bet.type} - $${bet.amount} <button class="cancel-single-bet" data-index="${index}">Cancel</button></p>`;
+        });
+        $('#current-bets').html(betsHtml);
+
+        $('.cancel-single-bet').click(function() {
+            const index = $(this).data('index');
+            bets.splice(index, 1);
+            updateCurrentBets();
+            updateSpinButtonState();
+        });
+
+        updateSpinButtonState();
+    }
+        function updateSpinButtonState() {
+        if (bets.length > 0) {
+            $('#spin-roulette').show().prop('disabled', false);
+        } else {
+            $('#spin-roulette').hide().prop('disabled', true);
+        }
+    }
         $('#confirm-bet').click(function() {
             if (currentBetAmount > 0) {
                 bets.push({ type: currentBetType, amount: currentBetAmount });
@@ -245,51 +299,162 @@
                 $('#bet-selection').show();
                 $('#bet-amounts').hide();
                 $('#confirm-bet').text('Confirm');
+                updateSpinButtonState();
             }
         });
 
-        // Обробка натискання кнопки "Spin"
-        $('#spin-roulette').click(function() {
-            $.post('/roulette/spin/', { bets: JSON.stringify(bets), csrfmiddlewaretoken: csrfToken }, function(data) {
-                const result = data.result;
-                const winAmount = data.win_amount;
+        $('#show-full-history').click(function() {
+            showingFullHistory = !showingFullHistory;
+            $(this).text(showingFullHistory ? "Show Last 5" : "Show Full History");
+            updateHistory();
+        });
 
-                // Анімація колеса рулетки
-                $('#ball').animate({ top: '0%', left: '50%' }, 2000, function() {
-                    $(this).animate({ top: '50%', left: '50%' }, 500);
-                });
 
-                setTimeout(function() {
-                    let message = `The ball landed on ${result}. `;
-                    message += winAmount > 0 ? `You won $${winAmount}!` : 'You lost.';
 
-                    history.push(`Spin result: ${result}. Outcome: ${winAmount > 0 ? 'Win' : 'Loss'}`);
-                    updateHistory();
 
-                    Swal.fire({
-                        title: 'Roulette Result',
-                        text: message,
-                        icon: winAmount > 0 ? 'success' : 'error',
-                        confirmButtonText: 'Awesome!',
-                        background: '#2c3e50',
-                        color: '#ffffff',
-                        confirmButtonColor: '#e74c3c'
-                    }).then(() => {
-                        updateBalance(data.balance);
-                        bets = [];
-                        updateCurrentBets();
-                        $('#spin-roulette').hide();
+
+        function disableBettingOptions() {
+            $('.bet-options button, .bet-amount, #cancel-bet, #confirm-bet, #confirm-number, .cancel-single-bet').prop('disabled', true);
+            $('#number-selection, #bet-amounts').hide();
+        }
+        function enableBettingOptions() {
+        $('.bet-options button, .bet-amount, #cancel-bet, #confirm-bet, #confirm-number').prop('disabled', false);
+        $('#bet-selection').show();
+}
+
+        function spinRouletteWheel(result) {
+            return new Promise((resolve) => {
+                const numbers = [
+                    0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26
+                ];
+                const colors = {
+                    0: 'green',
+                    32: 'red', 15: 'black', 19: 'red', 4: 'black', 21: 'red', 2: 'black', 25: 'red', 17: 'black',
+                    34: 'red', 6: 'black', 27: 'red', 13: 'black', 36: 'red', 11: 'black', 30: 'red', 8: 'black',
+                    23: 'red', 10: 'black', 5: 'red', 24: 'black', 16: 'red', 33: 'black', 1: 'red', 20: 'black',
+                    14: 'red', 31: 'black', 9: 'red', 22: 'black', 18: 'red', 29: 'black', 7: 'red', 28: 'black',
+                    12: 'red', 35: 'black', 3: 'red', 26: 'black'
+                };
+
+                const resultNumber = parseInt(result);
+                const targetIndex = numbers.indexOf(resultNumber);
+                const totalNumbers = numbers.length;
+                let currentIndex = 0;
+                let spins = 0;
+                const totalSpins = 3;
+
+                let currentSpeed = 50;
+                let minSpeed = 200;
+                let maxSpinTime = 10000;
+                let startTime = Date.now();
+
+                function spin() {
+                    if ((spins < totalSpins || currentIndex !== targetIndex) && (Date.now() - startTime < maxSpinTime)) {
+                        let nextIndex = (currentIndex + 1) % totalNumbers;
+                        currentIndex = nextIndex;
+
+                        const angle = (currentIndex / totalNumbers) * 360;
+                        const radians = angle * (Math.PI / 180);
+                        const radius = 120;
+                        const x = Math.cos(radians) * radius;
+                        const y = Math.sin(radians) * radius;
+
+                        $('#ball').css({
+                            transform: `translate(${x}px, ${y}px)`
+                        });
+
+                        const currentNumber = numbers[currentIndex];
+                        const currentColor = colors[currentNumber];
+                        $('#number-display').text(currentNumber).css('color', currentColor);
+                        $('#roulette-wheel').css('background-color', currentColor === 'red' ? '#e74c3c' : (currentColor === 'black' ? '#34495e' : '#27ae60'));
+
+                        if (spins >= totalSpins) {
+                            currentSpeed += 20;
+
+                            if (currentIndex === targetIndex && currentSpeed >= minSpeed) {
+                                finishSpin();
+                                return;
+                            }
+                        }
+
+                        if (currentIndex === totalNumbers - 1) {
+                            spins++;
+                        }
+
+                        setTimeout(spin, currentSpeed);
+                    } else {
+                        finishSpin();
+                    }
+                }
+
+                function finishSpin() {
+                    $('#ball').css({
+                        transform: 'translate(-50%, -50%)'
                     });
-                }, 2500);
-            }).fail(function() {
-                alert('Error processing the spin. Please try again.');
+                    $('#number-display').text(resultNumber).css('color', colors[resultNumber]);
+                    $('#roulette-wheel').css('background-color', colors[resultNumber] === 'red' ? '#e74c3c' : (colors[resultNumber] === 'black' ? '#34495e' : '#27ae60'));
+                    setTimeout(resolve, 1000);
+                }
+
+                spin();
             });
+        }
+
+    $('#spin-roulette').click(function() {
+            if (isSpinning) return;
+            isSpinning = true;
+            $(this).prop('disabled', true);
+            disableBettingOptions();
+
+        $.post('/roulette/spin/', { bets: JSON.stringify(bets), csrfmiddlewaretoken: csrfToken }, function(data) {
+            const result = data.result.split(' ')[0];
+            const winAmount = data.win_amount;
+
+            spinRouletteWheel(result).then(() => {
+                let message = `The ball landed on ${data.result}. `;
+                if (winAmount > 0) {
+                    message += `You won $${winAmount}!`;
+                } else {
+                    message += 'You lost.';
+                }
+
+                history.unshift(`Spin result: ${data.result}. Outcome: ${winAmount > 0 ? 'Win' : 'Loss'}`);
+                updateHistory();
+
+                Swal.fire({
+                    title: 'Roulette Result',
+                    text: message,
+                    icon: winAmount > 0 ? 'success' : 'error',
+                    confirmButtonText: 'Awesome!',
+                    background: '#2c3e50',
+                    color: '#ffffff',
+                    confirmButtonColor: '#e74c3c'
+                }).then(() => {
+                    updateBalance(data.balance);
+                    bets = [];
+                    updateCurrentBets();
+                    isSpinning = false;
+                    updateSpinButtonState();
+                    resetGame();
+                });
+            });
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error('AJAX error:', textStatus, errorThrown);
+            alert('Error processing the spin. Please try again.');
+            isSpinning = false;
+            updateSpinButtonState();
+            resetGame();
         });
     });
 
+
+
+                });
+
     $('#back-to-home').click(function() {
-  window.location.href = '/';
-});
+        window.location.href = '/';
+    });
+
 </script>
 
 </body>

@@ -78,65 +78,96 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="buttons">
-            <button id="hit" {% if game_state.game_over or bet == 0 %}disabled{% endif %}>Hit</button>
-            <button id="stay" {% if game_state.game_over or bet == 0 %}disabled{% endif %}>Stay</button>
+<div class="buttons">
+            <button id="deal" style="display: none;">Deal</button>
+            <button id="hit" style="display: none;">Hit</button>
+            <button id="stay" style="display: none;">Stay</button>
         </div>
     </div>
     <script>
-
-
         $(document).ready(function() {
-
             const MAX_BET = 10000;
+            let gameStarted = false;
 
-            function updateGameState(data) {
-                $('#balance').text(data.balance);
-                $('#current-bet').text(data.bet);
-                $('#player-score').text(data.game_state.player_score);
-                $('#dealer-score').text(data.game_state.dealer_score);
-                updatePlayerHand(data.game_state.player_hand);
-                updateDealerHand(data.game_state.dealer_hand, data.game_state.game_over);
+        function updateGameState(data) {
+            $('#balance').text(data.balance);
+            $('#current-bet').text(data.bet);
+            $('#player-score').text(gameStarted ? data.game_state.player_score : '?');
+            $('#dealer-score').text(gameStarted ? data.game_state.dealer_score : '?');
+            updatePlayerHand(data.game_state.player_hand);
+            updateDealerHand(data.game_state.dealer_hand, data.game_state.game_over);
 
-                if (data.game_state.game_over || data.bet == 0) {
-                    $('#hit, #stay').prop('disabled', true);
-                } else {
-                    $('#hit, #stay').prop('disabled', false);
-                }
+            if (data.game_state.game_over || data.bet == 0) {
+                $('#hit, #stay').hide();
+                $('#deal').show();
+                $('.bet-btn').show()
+                $('#cancel-bet').show();
 
-                    if (data.bet > 0) {
-                    $('.bet-btn, #cancel-bet').prop('disabled', true);  // Disable bet buttons
-                } else {
-                    $('.bet-btn, #cancel-bet').prop('disabled', false); // Enable bet buttons if no bet
-                }
+            } else if (gameStarted) {
+                $('#deal').hide();
+                $('.bet-btn').hide()
+                $('#hit, #stay').show();
+            }
+
+            if (data.bet > 0) {
+                $('#deal').show();
+                $('.bet-btn').show();
+                $('#cancel-bet').show();
+            } else {
+                $('#deal').hide();
+                $('.bet-btn').show();
 
             }
 
+            if (gameStarted) {
+                $('#hit, #stay').show();
+                $('.bet-btn, #cancel-bet, #deal').hide()
+            }
+        }
+
             function updatePlayerHand(hand) {
                 $('#player-hand').empty();
-                hand.forEach(function(card) {
-                    $('#player-hand').append(
-                        `<div class="card ${(card.suit === '♥' || card.suit === '♦') ? 'red' : ''}">
-                            <span>${card.rank}</span>
-                            <span>${card.suit}</span>
-                        </div>`
-                    );
-                });
+                if (gameStarted) {
+                    hand.forEach(function(card) {
+                        $('#player-hand').append(
+                            `<div class="card ${(card.suit === '♥' || card.suit === '♦') ? 'red' : ''}">
+                                <span>${card.rank}</span>
+                                <span>${card.suit}</span>
+                            </div>`
+                        );
+                    });
+                }
             }
 
             function updateDealerHand(hand, gameOver) {
                 $('#dealer-hand').empty();
-                hand.forEach(function(card, index) {
+                if (hand.length > 0) {
+                    const firstCard = hand[0];
                     $('#dealer-hand').append(
-                        `<div class="card ${index === 1 && !gameOver ? 'hidden' : ''} ${(card.suit === '♥' || card.suit === '♦') ? 'red' : ''}">
-                            <span>${card.rank}</span>
-                            <span>${card.suit}</span>
+                        `<div class="card ${(firstCard.suit === '♥' || firstCard.suit === '♦') ? 'red' : ''}">
+                            <span>${firstCard.rank}</span>
+                            <span>${firstCard.suit}</span>
                         </div>`
                     );
-                });
+
+
+                    if (gameStarted) {
+                        hand.slice(1).forEach(function(card, index) {
+                            $('#dealer-hand').append(
+                                `<div class="card ${!gameOver && index === 0 ? 'hidden' : ''} ${(card.suit === '♥' || card.suit === '♦') ? 'red' : ''}">
+                                    <span>${card.rank}</span>
+                                    <span>${card.suit}</span>
+                                </div>`
+                            );
+                        });
+                    } else {
+                        $('#dealer-hand').append('<div class="card hidden"></div>');
+                    }
+                }
             }
 
             function endGame(message) {
+                gameStarted = false;
                 Swal.fire({
                     title: 'Game Over',
                     text: message,
@@ -180,41 +211,45 @@
                 });
             });
 
-            $('#new-game').click(function() {
-                window.location.href = '?new_game=1';
+        $('#deal').click(function() {
+            gameStarted = true;
+            $.get('start_game/', function(data) {
+                updateGameState(data);
+                $('#deal').hide();
+                $('#hit, #stay').prop('disabled', false);
+                $('.bet-btn, #cancel-bet').prop('disabled', true);
             });
+        });
 
             $('.bet-btn').click(function() {
                 var amount = $(this).data('amount');
                 var balance = parseInt($('#balance').text());
+                var currentBet = parseInt($('#current-bet').text());
                 if (amount > balance) {
                     amount = balance;
                 }
-                        if (amount > MAX_BET) {
-                        amount = MAX_BET;
+                if (currentBet + amount > MAX_BET) {
+                    amount = MAX_BET - currentBet;
                 }
 
                 $.get('place_bet/', { amount: amount }, function(data) {
-                    $('#balance').text(data.balance);
-                    $('#current-bet').text(data.bet);
-                    if (data.bet > 0) {
-                        $('#hit, #stay').prop('disabled', false);
-                    }
+                    updateGameState(data);
                 });
             });
 
             $('#cancel-bet').click(function() {
                 $.get('place_bet/', { amount: 0 }, function(data) {
-                    $('#balance').text(data.balance);
-                    $('#current-bet').text(data.bet);
-                    $('#hit, #stay').prop('disabled', true);
+                    updateGameState(data);
                 });
             });
-        });
 
-    $('#back-to-home').click(function() {
-  window.location.href = '/';
-});
+            $('#back-to-home').click(function() {
+                window.location.href = '/';
+            });
+
+            // Initialize the game state
+            updateGameState({{ game_state|safe }});
+        });
     </script>
 </body>
 </html>
