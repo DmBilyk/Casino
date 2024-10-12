@@ -2182,3 +2182,10 @@ Starting new HTTPS connection (1): accounts.google.com:443
 https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
 Starting new HTTPS connection (1): www.googleapis.com:443
 https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+/Users/macbook/Documents/BlackJack/BlackJack/settings.py changed, reloading.
+Watching for file changes with StatReloader
