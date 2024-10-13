@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-2#x0wt0l)boedzy_2#bjnc95dfx*6e$lkab@#s%lu53pm4cn=w
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'casino-production-b3c9.up.railway.app']
 
+
+CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost',
     'http://127.0.0.1',
@@ -189,12 +191,16 @@ SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = ['casino-production-b3c9.up.railway.app', '
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
-SESSION_COOKIE_SAMESITE = None
-SESSION_COOKIE_HTTPONLY = False
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+
+SESSION_COOKIE_HTTPONLY = True
+
+
+
+SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['state']
+SESSION_COOKIE_SECURE = False
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 CACHES = {
