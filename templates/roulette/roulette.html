@@ -42,9 +42,10 @@
         border-radius: 50%;
         border: 10px solid #f1c40f;
         margin: 0 auto 20px;
+        background-color: #27ae60;
         position: relative;
         overflow: hidden;
-        background-color: #27ae60;
+
     }
 
     #ball {
@@ -97,6 +98,10 @@
         cursor: pointer; /* Pointer cursor */
         transition: background-color 0.3s; /* Smooth transition */
     }
+
+        #confirm-bet {
+            max-width: 150px; /* Allow slightly more width for the confirm button */
+        }
     .bet-amount:hover, #cancel-bet:hover, #confirm-bet:hover {
         background-color: #c0392b; /* Darker color on hover */
     }
@@ -213,39 +218,68 @@
 }
 
     /* Mobile-specific adjustments */
-    @media (max-width: 600px) {
-        body {
-            padding: 10px;
-        }
-        #roulette-wheel {
-            width: 80vw;
-            height: 80vw;
-            max-width: 250px;
-            max-height: 250px;
-        }
-        button {
-            font-size: 14px;
-            min-width: 80px; /* Adjust minimum width for smaller screens */
-            flex: 1 1 auto; /* Allow buttons to take full width */
-            max-width: 100%; /* Allow buttons to stretch full width */
-        }
-        h1, h2 {
-            font-size: calc(1.6rem + 1vw);
-        }
-                .bet-options {
-            flex-direction: column; /* Stack buttons vertically on mobile */
-            align-items: center; /* Center buttons horizontally */
-        }
-        .bet-controls {
-            flex-direction: column; /* Stack control buttons vertically */
-            align-items: center; /* Center control buttons */
-        }
-        .bet-amount, #cancel-bet, #confirm-bet {
-            width: 100%; /* Full width for buttons on small screens */
-            min-width: unset; /* Remove minimum width to allow full width */
-        }
 
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
     }
+
+            .bet-amount, #cancel-bet, #confirm-bet {
+            flex: 1;
+            min-width: 80px;
+            max-width: 120px;
+            padding: 10px;
+            font-size: calc(1rem + 0.3vw);
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            height: 60px; /* Set a fixed height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            word-wrap: break-word;
+            overflow: hidden;
+        }
+    #roulette-wheel {
+        width: 80vw;
+        height: 80vw;
+        max-width: 250px;
+        max-height: 250px;
+    }
+
+    button {
+        font-size: 14px;
+        min-width: 80px;
+        flex: 1 1 auto;
+        max-width: 100%;
+    }
+
+    h1, h2 {
+        font-size: calc(1.6rem + 1vw);
+    }
+
+
+    .bet-amount, #cancel-bet, #confirm-bet {
+        width: 100%;
+        min-width: unset;
+        margin-bottom: 10px;
+    }
+    .bet-options, .bet-controls {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .bet-amount, #cancel-bet, #confirm-bet {
+        width: 80%;
+        max-width: none;
+        margin-bottom: 10px;
+    }
+}
+
 </style>
 
 
@@ -336,16 +370,17 @@
             $('#balance-amount').text(newBalance);
         }
 
-    function resetGame() {
-        currentBetType = '';
-        currentBetAmount = 0;
-        bets = [];
-        isSpinning = false;
-        updateCurrentBets();
-        enableBettingOptions();
-        $('#confirm-bet').text('Confirm');
-        $('#number-selection, #bet-amounts').hide();
-    }
+        function resetGame() {
+            currentBetType = '';
+            currentBetAmount = 0;
+            bets = [];
+            isSpinning = false;
+            updateCurrentBets();
+            enableBettingOptions();
+            $('#confirm-bet').html('Confirm');
+            $('#number-selection, #bet-amounts').hide();
+            $('#bet-selection').show();
+        }
         function updateCurrentBets() {
             let betsHtml = '<h3>Current Bets:</h3>';
             bets.forEach((bet, index) => {
@@ -378,6 +413,7 @@
 
         $('.bet-options button').click(function() {
             currentBetType = $(this).text().toLowerCase();
+            currentBetAmount = 0;
             if (currentBetType === 'number') {
                 $('#number-selection').show();
                 $('#bet-amounts').hide();
@@ -386,8 +422,8 @@
                 $('#number-selection').hide();
             }
             $('#bet-selection').hide();
+            $('#confirm-bet').html('Confirm');
         });
-
         $('#confirm-number').click(function() {
             const number = $('#bet-number-input').val();
             if (number >= 0 && number <= 36) {
@@ -404,9 +440,9 @@
             const maxBet = currentBetType.includes('number') ? 1000 : 10000;
             if (currentBetAmount + amount <= maxBet) {
                 currentBetAmount += amount;
-                $('#confirm-bet').text(`Confirm $${currentBetAmount}`);
+                $('#confirm-bet').html(`Confirm<br>$${currentBetAmount.toLocaleString()}`);
             } else {
-                alert(`Maximum bet for ${currentBetType} is $${maxBet}`);
+                alert(`Maximum bet for ${currentBetType} is $${maxBet.toLocaleString()}`);
             }
         });
 
@@ -415,6 +451,7 @@
             $('#bet-selection').show();
             $('#bet-amounts').hide();
             $('#number-selection').hide();
+            $('#confirm-bet').html('Confirm');
         });
 
         function updateCurrentBets() {
@@ -504,12 +541,12 @@
 
                 const angle = (currentIndex / totalNumbers) * 360;
                 const radians = angle * (Math.PI / 180);
-                const radius = 120;
+                const radius = $('#roulette-wheel').width() / 2 - $('#ball').width() / 2 - 10; // Adjust for border
                 const x = Math.cos(radians) * radius;
                 const y = Math.sin(radians) * radius;
 
                 $('#ball').css({
-                    transform: `translate(${x}px, ${y}px)`
+                    transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`
                 });
 
                 const currentNumber = numbers[currentIndex];
@@ -536,14 +573,14 @@
             }
         }
 
-                function finishSpin() {
-                    $('#ball').css({
-                        transform: 'translate(-50%, -50%)'
-                    });
-                    $('#number-display').text(resultNumber).css('color', colors[resultNumber]);
-                    $('#roulette-wheel').css('background-color', colors[resultNumber] === 'red' ? '#e74c3c' : (colors[resultNumber] === 'black' ? '#34495e' : '#27ae60'));
-                    setTimeout(resolve, 1000);
-                }
+        function finishSpin() {
+            $('#ball').css({
+                transform: 'translate(-50%, -50%)'
+            });
+            $('#number-display').text(resultNumber).css('color', colors[resultNumber]);
+            $('#roulette-wheel').css('background-color', colors[resultNumber] === 'red' ? '#e74c3c' : (colors[resultNumber] === 'black' ? '#34495e' : '#27ae60'));
+            setTimeout(resolve, 1000);
+        }
 
                 spin();
             });
