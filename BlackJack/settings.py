@@ -32,6 +32,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://casino-production-b3c9.up.railway.app']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -52,13 +53,12 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-     'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'BlackJack.urls'
@@ -141,8 +141,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
 
 
-SESSION_COOKIE_SECURE = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -169,7 +168,6 @@ LOGGING = {
 
 
 
-
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '49256549136-1nlkkd122dve170t0lhconmb0cl1rbau.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
@@ -180,13 +178,36 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-LOGIN_URL = '/auth/login/google-oauth2/'
+LOGIN_URL = '/auth/login/google-oauth2'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://casino-production-b3c9.up.railway.app/auth/complete/google-oauth2/'
 
 
-SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = ['casino-production-b3c9.up.railway.app']
+SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = ['casino-production-b3c9.up.railway.app', 'localhost', '127.0.0.1']
+
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
+
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+SESSION_COOKIE_SAMESITE = None
+SESSION_COOKIE_HTTPONLY = False
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
+
+
+
+
+
 # Time zone and language settings
 TIME_ZONE = 'UTC'
 USE_TZ = True
