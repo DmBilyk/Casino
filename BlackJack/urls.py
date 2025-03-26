@@ -21,9 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('casino_main.urls')),
 
-    path('slot_machine/', include('slot_machine_app.urls')),
-    path('roulette/', include('roulette.urls')),
-
     path('api/', include('blackjack_app.urls')),
     path('api-docs/', include('blackjack_app.swagger')),
 
