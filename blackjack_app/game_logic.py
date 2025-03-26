@@ -1,5 +1,6 @@
 import random
 
+
 class Card:
     def __init__(self, rank, suit):
         self.rank = rank
@@ -11,6 +12,7 @@ class Card:
     def to_dict(self):
         return {'rank': self.rank, 'suit': self.suit}
 
+
 class BlackjackGame:
     def __init__(self):
         self.player_hand = []
@@ -19,14 +21,16 @@ class BlackjackGame:
         self.game_over = False
 
     def create_deck(self):
+
         ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
         suits = ['♠', '♥', '♣', '♦']
         self.deck = [Card(rank, suit) for suit in suits for rank in ranks]
         random.shuffle(self.deck)
+        return self.deck
 
     def deal_card(self):
         if not self.deck:
-            self.create_deck()  # Reshuffle when the deck is empty
+            self.create_deck()
         return self.deck.pop()
 
     def card_value(self, card):
@@ -40,9 +44,12 @@ class BlackjackGame:
     def calculate_hand(self, hand):
         total = sum(self.card_value(card) for card in hand)
         aces = sum(1 for card in hand if card.rank == 'A')
+
+
         while total > 21 and aces:
             total -= 10
             aces -= 1
+
         return total
 
     def start_game(self):
@@ -53,12 +60,17 @@ class BlackjackGame:
 
     def player_hit(self):
         self.player_hand.append(self.deal_card())
-        if self.calculate_hand(self.player_hand) > 21:
+        player_score = self.calculate_hand(self.player_hand)
+
+        if player_score > 21:
             self.game_over = True
             return "Bust! You lose."
+        elif player_score == 21:
+            return "Blackjack! 21 points."
         return None
 
     def dealer_play(self):
+
         while self.calculate_hand(self.dealer_hand) < 17:
             self.dealer_hand.append(self.deal_card())
 
@@ -67,20 +79,28 @@ class BlackjackGame:
 
         self.game_over = True
 
+
         if dealer_score > 21:
             return "Dealer busts! You win!"
+        elif dealer_score == player_score:
+            return "It's a tie!"
         elif dealer_score > player_score:
             return "Dealer wins!"
-        elif dealer_score < player_score:
-            return "You win!"
         else:
-            return "It's a tie!"
+            return "You win!"
 
     def get_game_state(self):
+
+        visible_dealer_cards = self.dealer_hand
+        if not self.game_over and len(self.dealer_hand) > 0:
+            dealer_score = self.card_value(self.dealer_hand[0])
+        else:
+            dealer_score = self.calculate_hand(self.dealer_hand)
+
         return {
             'player_hand': [card.to_dict() for card in self.player_hand],
             'dealer_hand': [card.to_dict() for card in self.dealer_hand],
             'player_score': self.calculate_hand(self.player_hand),
-            'dealer_score': self.calculate_hand([self.dealer_hand[0]]),
+            'dealer_score': dealer_score,
             'game_over': self.game_over,
         }

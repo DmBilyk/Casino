@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-2#x0wt0l)boedzy_2#bjnc95dfx*6e$lkab@#s%lu53pm4cn=w
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'casino-production-b3c9.up.railway.app']
 
 
-CSRF_COOKIE_SECURE = True
+
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost',
     'http://127.0.0.1',
@@ -49,6 +49,12 @@ INSTALLED_APPS = [
     'slot_machine_app',
     'casino_main',
     'roulette',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'drf_yasg',
+    'rest_framework_social_oauth2',
+
+
 ]
 
 MIDDLEWARE = [
@@ -147,7 +153,6 @@ X_FRAME_OPTIONS = 'DENY'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 # Static files configuration
 
 
@@ -170,6 +175,7 @@ LOGGING = {
 
 
 
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '49256549136-1nlkkd122dve170t0lhconmb0cl1rbau.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
@@ -183,12 +189,10 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_URL = '/auth/login/google-oauth2'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://casino-production-b3c9.up.railway.app/auth/complete/google-oauth2/'
-
 
 SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = ['casino-production-b3c9.up.railway.app', 'localhost', '127.0.0.1']
 
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
 
 
 
@@ -200,7 +204,7 @@ SESSION_COOKIE_HTTPONLY = True
 
 
 SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['state']
-SESSION_COOKIE_SECURE = False
+
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 CACHES = {
@@ -209,10 +213,46 @@ CACHES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
+    ),
+}
+import os
+
+ENVIRONMENT = os.getenv("DJANGO_ENV", "development")
+
+if ENVIRONMENT == "production":
+    SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'https://casino-production-b3c9.up.railway.app/auth/complete/google-oauth2/'
+    SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+
+else:
+    SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/auth/complete/google-oauth2/'
+    SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
 
 
+SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = [
+    'casino-production-b3c9.up.railway.app',
+    'localhost',
+    '127.0.0.1'
+]
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+}
 
 # Time zone and language settings
 TIME_ZONE = 'UTC'
@@ -222,3 +262,7 @@ USE_I18N = True
 USE_L10N = True
 
 DEBUG = True
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+# Налаштування для RedirectURI
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['profile', 'email']

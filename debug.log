@@ -2421,3 +2421,600 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 /Users/macbook/Documents/BlackJack/BlackJack/settings.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/macbook/Documents/Casino/BlackJack/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/macbook/Documents/Casino/BlackJack/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/macbook/Documents/Casino/BlackJack/settings.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/macbook/Documents/Casino/BlackJack/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+/Users/macbook/Documents/Casino/blackjack_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /place_bet
+Not Found: /place_bet
+Not Found: /place_bet
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /api/blackjack/game/
+Not Found: /api/blackjack/bet/
+Not Found: /api/blackjack/bet/
+Not Found: /api/blackjack/bet/
+Not Found: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /api/blackjack/game/
+Not Found: /api/blackjack/bet/
+Not Found: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Internal Server Error: /auth/complete/google-oauth2/
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/social_django/utils.py", line 49, in wrapper
+    return func(request, backend, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/social_django/views.py", line 31, in complete
+    return do_complete(
+           ^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/social_core/actions.py", line 49, in do_complete
+    user = backend.complete(user=user, redirect_name=redirect_name, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/social_core/backends/base.py", line 39, in complete
+    return self.auth_complete(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/social_core/utils.py", line 253, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/social_core/backends/oauth.py", line 411, in auth_complete
+    state = self.validate_state()
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/social_core/backends/oauth.py", line 101, in validate_state
+    raise AuthStateMissing(self, "state")
+social_core.exceptions.AuthStateMissing: Session value state missing.
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /api/blackjack/game/
+Not Found: /api/blackjack/bet/
+/Users/macbook/Documents/Casino/blackjack_app/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /blackjack/
+Forbidden: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /blackjack/
+Forbidden: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Method Not Allowed: /api/auth/token/
+Unauthorized: /api/auth/token/
+Method Not Allowed: /api/auth/token/
+Not Found: /blackjack/
+Forbidden: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Method Not Allowed: /api/auth/token/
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Forbidden: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Forbidden: /api/blackjack/bet/
+/Users/macbook/Documents/Casino/blackjack_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+/Users/macbook/Documents/Casino/blackjack_app/views.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Forbidden: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Forbidden: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Forbidden: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Forbidden: /api/blackjack/bet/
+/Users/macbook/Documents/Casino/blackjack_app/facade.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Forbidden: /api/blackjack/bet/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /apiapi/token/
+Method Not Allowed: /api/token/
+Unauthorized: /api/token/
+Unauthorized: /api/token/
+Unauthorized: /api/token/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Method Not Allowed: /api/blackjack/google/
+Not Found: /blackjack/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /blackjack/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/macbook/Documents/Casino/BlackJack/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+/Users/macbook/Documents/Casino/BlackJack/settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /api/
+Not Found: /api
+Not Found: /api-docs/
+Watching for file changes with StatReloader
+Not Found: /api/
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /api/blackjack/game/
+Not Found: /api/blackjack/bet/
+Not Found: /api-docs/game
+Not Found: /api-docs/game
+Not Found: /api-docs/
+Internal Server Error: /api/api/game/deal/
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/views.py", line 70, in post
+    result = facade.deal_cards(request.session)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/facade.py", line 48, in deal_cards
+    game_state = session['game']
+                 ~~~~~~~^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/sessions/backends/base.py", line 55, in __getitem__
+    return self._session[key]
+           ~~~~~~~~~~~~~^^^^^
+KeyError: 'game'
+Internal Server Error: /api/api/auth/google/
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/views.py", line 29, in post
+    if serializer.is_valid():
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/serializers.py", line 31, in validate
+    user = self._get_user_from_google_token(access_token)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/serializers.py", line 41, in _get_user_from_google_token
+    user = User.objects.filter(social_auth__extra_data__contains={'access_token': access_token}).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 1097, in first
+    for obj in queryset[:1]:
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1561, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 775, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 557, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/where.py", line 151, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 557, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/fields/json.py", line 165, in as_sql
+    raise NotSupportedError(
+django.db.utils.NotSupportedError: contains lookup is not supported on this database backend.
+Internal Server Error: /api/api/game/deal/
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/views.py", line 70, in post
+    result = facade.deal_cards(request.session)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/facade.py", line 48, in deal_cards
+    game_state = session['game']
+                 ~~~~~~~^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/sessions/backends/base.py", line 55, in __getitem__
+    return self._session[key]
+           ~~~~~~~~~~~~~^^^^^
+KeyError: 'game'
+Internal Server Error: /api/api/game/deal/
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/views.py", line 70, in post
+    result = facade.deal_cards(request.session)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/facade.py", line 48, in deal_cards
+    game_state = session['game']
+                 ~~~~~~~^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/contrib/sessions/backends/base.py", line 55, in __getitem__
+    return self._session[key]
+           ~~~~~~~~~~~~~^^^^^
+KeyError: 'game'
+Watching for file changes with StatReloader
+Unauthorized: /api/api/game/bet/
+Internal Server Error: /api/api/auth/google/
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/views.py", line 29, in post
+    if serializer.is_valid():
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/serializers.py", line 31, in validate
+    user = self._get_user_from_google_token(access_token)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/serializers.py", line 41, in _get_user_from_google_token
+    user = User.objects.filter(social_auth__extra_data__contains={'access_token': access_token}).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 1097, in first
+    for obj in queryset[:1]:
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1561, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 775, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 557, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/where.py", line 151, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 557, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/fields/json.py", line 165, in as_sql
+    raise NotSupportedError(
+django.db.utils.NotSupportedError: contains lookup is not supported on this database backend.
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Not Found: /api/blackjack/game/
+Internal Server Error: /api/api/auth/google/
+Traceback (most recent call last):
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/views.py", line 29, in post
+    if serializer.is_valid():
+       ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/rest_framework/serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/serializers.py", line 31, in validate
+    user = self._get_user_from_google_token(access_token)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Documents/Casino/blackjack_app/serializers.py", line 41, in _get_user_from_google_token
+    user = User.objects.filter(social_auth__extra_data__contains={'access_token': access_token}).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 1097, in first
+    for obj in queryset[:1]:
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 400, in __iter__
+    self._fetch_all()
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1561, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 775, in as_sql
+    self.compile(self.where) if self.where is not None else ("", [])
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 557, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/where.py", line 151, in as_sql
+    sql, params = compiler.compile(child)
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 557, in compile
+    sql, params = node.as_sql(self, self.connection)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/BlackJack/lib/python3.11/site-packages/django/db/models/fields/json.py", line 165, in as_sql
+    raise NotSupportedError(
+django.db.utils.NotSupportedError: contains lookup is not supported on this database backend.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Unauthorized: /api/api/game/state/
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): accounts.google.com:443
+https://accounts.google.com:443 "POST /o/oauth2/token HTTP/11" 200 None
+Starting new HTTPS connection (1): www.googleapis.com:443
+https://www.googleapis.com:443 "GET /oauth2/v3/userinfo HTTP/11" 200 None

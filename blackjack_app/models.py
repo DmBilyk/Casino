@@ -86,3 +86,15 @@ class UserBalance(models.Model):
 
     def __str__(self):
         return f"{self.user.username}: {self.balance}"
+
+
+class GameHistory(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    start_time = models.DateTimeField(auto_now_add=True)
+    end_time = models.DateTimeField(null=True, blank=True)
+    initial_bet = models.IntegerField(default=0)
+    outcome = models.CharField(max_length=50, null=True, blank=True)
+    profit_loss = models.IntegerField(default=0)
+    def __str__(self):
+        return f"{self.user.username} - {self.start_time} - {self.outcome}"
