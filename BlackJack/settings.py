@@ -16,12 +16,16 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2#x0wt0l)boedzy_2#bjnc95dfx*6e$lkab@#s%lu53pm4cn=w'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'casino-production-b3c9.up.railway.app']
@@ -173,9 +177,13 @@ LOGGING = {
 
 
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_OAUTH_SECRET')
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '49256549136-1nlkkd122dve170t0lhconmb0cl1rbau.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+DJANGO_ENV = "development"
+
 
 
 AUTHENTICATION_BACKENDS = (

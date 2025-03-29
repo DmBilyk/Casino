@@ -1,26 +1,30 @@
 from casino_main.models import Profile
 from .game_logic import BlackjackGame, Card
 from django.contrib.auth.models import User
+from typing import Dict, List, Any, Union
+
 
 
 class BlackjackGameFacade:
+    """Refactoring Technique: Replace Constructor with Factory Method"""
+    @classmethod
+    def create(cls, user: Union[User, None]):
+        return cls(user)
 
-
-    def __init__(self, user):
+    def __init__(self, user: Union[User, None]):
         self.user = user
-        if hasattr(user, 'is_authenticated') and user.is_authenticated:
-            self.profile, _ = Profile.objects.get_or_create(user=user)
-        else:
+        self.profile = (
+            Profile.objects.get_or_create(user=user)[0]
+            if user and hasattr(user, 'is_authenticated') and user.is_authenticated
+            else type('obj', (object,), {'balance': 1000, 'save': lambda: None})
+        )
 
-            self.profile = type('obj', (object,), {'balance': 1000, 'save': lambda: None})
-
-    def get_game_state(self, session):
-
+    def get_game_state(self, session: Dict[str, Any]) -> Dict[str, Any]:
+        """Refactoring Technique: Extract Method (improve readability)"""
         game_state = session.get('game')
         bet = session.get('bet', 0)
 
         if not game_state:
-
             game = BlackjackGame()
             game.create_deck()
             game.dealer_hand = [game.deal_card()]
@@ -144,3 +148,4 @@ class BlackjackGameFacade:
             'bet': session.get('bet', 0),
             'game_state': session.get('game')
         }
+

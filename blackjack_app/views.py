@@ -12,6 +12,9 @@ from .serializers import GoogleAuthTokenSerializer, BetSerializer
 
 
 class GoogleAuthTokenView(APIView):
+    """
+    View to exchange Google token for JWT token.
+    """
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
@@ -25,6 +28,9 @@ class GoogleAuthTokenView(APIView):
         operation_description="Exchange Google token for JWT token"
     )
     def post(self, request):
+        """
+        Handle POST request to exchange Google token for JWT token.
+        """
         serializer = GoogleAuthTokenSerializer(data=request.data)
         if serializer.is_valid():
             return Response({'access_token': serializer.validated_data['token']})
@@ -32,6 +38,9 @@ class GoogleAuthTokenView(APIView):
 
 
 class GameStateView(APIView):
+    """
+    View to get the current game state.
+    """
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
@@ -46,12 +55,18 @@ class GameStateView(APIView):
         operation_description="Get current game state"
     )
     def get(self, request):
+        """
+        Handle GET request to retrieve the current game state.
+        """
         facade = BlackjackGameFacade(request.user)
         result = facade.get_game_state(request.session)
         return Response(result)
 
 
 class DealCardsView(APIView):
+    """
+    View to deal initial cards to start the game.
+    """
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
@@ -66,12 +81,18 @@ class DealCardsView(APIView):
         operation_description="Deal initial cards to start the game"
     )
     def post(self, request):
+        """
+        Handle POST request to deal initial cards.
+        """
         facade = BlackjackGameFacade(request.user)
         result = facade.deal_cards(request.session)
         return Response(result)
 
 
 class HitView(APIView):
+    """
+    View to handle player taking another card.
+    """
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
@@ -87,12 +108,18 @@ class HitView(APIView):
         operation_description="Player takes another card"
     )
     def post(self, request):
+        """
+        Handle POST request for player to take another card.
+        """
         facade = BlackjackGameFacade(request.user)
         result = facade.player_hit(request.session)
         return Response(result)
 
 
 class StayView(APIView):
+    """
+    View to handle player standing with current cards.
+    """
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
@@ -108,12 +135,18 @@ class StayView(APIView):
         operation_description="Player stands with current cards"
     )
     def post(self, request):
+        """
+        Handle POST request for player to stand with current cards.
+        """
         facade = BlackjackGameFacade(request.user)
         result = facade.player_stay(request.session)
         return Response(result)
 
 
 class BetView(APIView):
+    """
+    View to place a bet.
+    """
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
@@ -129,14 +162,19 @@ class BetView(APIView):
         operation_description="Place a bet"
     )
     def post(self, request):
+        """
+        Handle POST request to place a bet.
+        """
         amount = request.data.get('amount', 0)
         facade = BlackjackGameFacade(request.user)
         result = facade.place_bet(request.session, amount)
         return Response(result)
 
 
-
 class NewGameView(APIView):
+    """
+    View to start a new game.
+    """
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
@@ -151,6 +189,9 @@ class NewGameView(APIView):
         operation_description="Start a new game"
     )
     def post(self, request):
+        """
+        Handle POST request to start a new game.
+        """
         facade = BlackjackGameFacade(request.user)
         result = facade.start_new_game(request.session)
         return Response(result)
@@ -158,4 +199,7 @@ class NewGameView(APIView):
 
 @login_required
 def game_template_view(request):
+    """
+    Render the game template view.
+    """
     return render(request, 'blackjack_app/game.html')
